@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import TitleBar from './TtitleBar/TitleBar';
 
 class App  extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class App  extends Component {
     render() { 
         return (  
             <React.Fragment>
-                <h1>Flashcard Application</h1>
+                <TitleBar />
             </React.Fragment>
         );
     }
