@@ -4,7 +4,6 @@ const DisplayCollections = (props) => {
     return (
         <React.Fragment>
             <table>
-                   
                 <tbody>
                     <tr><td>Collections</td></tr>
                         {props.collections.map((collection, id) => {

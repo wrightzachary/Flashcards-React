@@ -25,8 +25,10 @@ class App  extends Component {
         })
     }
 
-    grabFlashcards = async () => {
-        let res = await axios.get(`http://127.0.0.1:8000/flashcard/${this.state.collection.id}`)
+    grabFlashcards = async (event) => {
+        let collection = (event);
+        console.log(collection);
+        let res = await axios.get(`http://127.0.0.1:8000/flashcard/${collection}`);
         this.setState({
             flashcards: res.data
         })
