@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import TitleBar from './TtitleBar/TitleBar';
+import TitleBar from './TitleBar/TitleBar';
+import DisplayCollections from './DisplayCollections/displayCollections';
+import axios from 'axios';
+
+
 
 class App  extends Component {
     constructor(props) {
@@ -9,10 +13,31 @@ class App  extends Component {
             collections: []
          }
     }
+
+    componentDidMount() {
+        this.makeGetRequest();
+    }
+
+    makeGetRequest = async () => {
+        let res = await axios.get('http://127.0.0.1:8000/collection/')
+        this.setState({
+            collections: res.data
+        })
+    }
+
+    grabFlashcards = async () => {
+        let res = await axios.get(`http://127.0.0.1:8000/flashcard/${this.state.collection.id}`)
+        this.setState({
+            flashcards: res.data
+        })
+        console.log(this.state.flashcards)
+    }
+
     render() { 
         return (  
             <React.Fragment>
                 <TitleBar />
+                <DisplayCollections collections={this.state.collections} grabFlashcards={this.grabFlashcards} />
             </React.Fragment>
         );
     }
