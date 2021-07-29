@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TitleBar from './TitleBar/TitleBar';
 import DisplayCollections from './DisplayCollections/displayCollections';
+import DisplayFlashcards from './DisplayFlashcards/displayFlashcards';
 import axios from 'axios';
 
 
@@ -9,7 +10,9 @@ class App  extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            flashcards:[], 
+            flashcards:[
+                {showHide: false}
+            ], 
             collections: []
          }
     }
@@ -28,11 +31,16 @@ class App  extends Component {
     grabFlashcards = async (event) => {
         let collection = (event);
         console.log(collection);
-        let res = await axios.get(`http://127.0.0.1:8000/flashcard/${collection}`);
+        let res = await axios.get(`http://127.0.0.1:8000/flashcard/${collection}/`);
         this.setState({
             flashcards: res.data
         })
         console.log(this.state.flashcards)
+    }
+
+    changeShowHide = (event) => {
+        let flashcardAnswer = (event);
+        flashcardAnswer.showHide = true  
     }
 
     render() { 
@@ -40,6 +48,7 @@ class App  extends Component {
             <React.Fragment>
                 <TitleBar />
                 <DisplayCollections collections={this.state.collections} grabFlashcards={this.grabFlashcards} />
+                <DisplayFlashcards flashcards={this.state.flashcards} changeShowHide={this.changeShowHide} />
             </React.Fragment>
         );
     }
