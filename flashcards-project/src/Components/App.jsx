@@ -37,11 +37,11 @@ class App  extends Component {
     addNewFlashcard = async (event) => {
         console.log(event)
         try {
-            let response = await axios.post(`http://127.0.0.1:8000/flashcard/${this.state.collection.id}`);
+            let response = await axios.post(`http://127.0.0.1:8000/flashcard/`, event);
             this.setState({
                 flashcards: response.data
             });
-            this.grabFlashcards()
+            this.grabFlashcards(this.state.collection.id)
         }
         catch(e){
             console.log(e.message)

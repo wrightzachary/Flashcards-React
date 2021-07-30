@@ -1,45 +1,47 @@
-import React, {component} from 'react';
-import DisplayCollections from '../DisplayCollections/displayCollections';
+import React, {Component} from 'react';
 
-class CreateFlashcard extends React.Component {
+
+class CreateFlashcard extends Component {
+
     constructor(props) {
       super(props);
       this.state = {
-
             collections: [],
-
-            question : '',
-            answer: '',
-            collectionId : '',
-
+            question : null,
+            answer: null,
+            collectionId : null,
       }
     }
   
-    handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
+    // handleChange(event) {
+    //     this.setState({
+    //         
+    //     })
+    // }
   
     handleSubmit(event) {
         event.preventDefault();
         const flashcard = {
-            
-            collectionId : this.state.collectionId,
-            question : this.state.question,
-            answer: this.state.answer,
-
-        }
-
-        this.props.addNewFlashcard();
-        this.setState({
+            collectionId : '',
             question : '',
             answer: '',
-            collectionId : '',
-
+        }
+        this.setState({
+            [event.target.name]: event.target.value
         });
+        this.addNewFlashcard(flashcard);
     }
   
+    mapCollections = async () => {
+        return(
+            this.state.collections.map()
+        )
+        
+
+    }
+    
+
+
     render() {
       return (
         <div >
@@ -49,18 +51,15 @@ class CreateFlashcard extends React.Component {
                 <h3>Add A New Flashcard!</h3> 
 
                         <label>Question:</label>
-                        <input type="text" name="question" value={this.state.question}
-                        onChange={this.handleChange} />
+                        <input type="text" name="question" value={this.state.question} />
 
                         <label>Answer:</label>
-                        <input type="text" name="answer" value={this.state.answer}
-                        onChange={this.handleChange} />
+                        <input type="text" name="answer" value={this.state.answer} />
                         <hr/>
-                        <input type="submit" class="btn btn-info" value="Add" />
 
                         <select name="collectionId" required id="id_collectionId">
-                            <option value selected>Select a collection</option>
-                            <option value="collection">{this.props.collectionId.name}</option>
+                            <option value selected >Select a collection</option>
+                            <option value="collection">{this.mapCollections}</option>
                         </select>
 
                         <input type="submit" class="btn btn-info" value="Add" />
