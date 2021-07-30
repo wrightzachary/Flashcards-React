@@ -10,9 +10,7 @@ class App  extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            flashcards:[
-                {showHide: false}
-            ], 
+            flashcards:[], 
             collections: []
          }
     }
@@ -38,9 +36,9 @@ class App  extends Component {
         console.log(this.state.flashcards)
     }
 
-    changeShowHide = (event) => {
+    showAnswer = (event) => {
         let flashcardAnswer = (event);
-        flashcardAnswer.showHide = true  
+        window.alert(flashcardAnswer);
     }
 
     render() { 
@@ -48,7 +46,7 @@ class App  extends Component {
             <React.Fragment>
                 <TitleBar />
                 <DisplayCollections collections={this.state.collections} grabFlashcards={this.grabFlashcards} />
-                <DisplayFlashcards flashcards={this.state.flashcards} changeShowHide={this.changeShowHide} />
+                <DisplayFlashcards flashcards={this.state.flashcards} showAnswer={this.showAnswer} />
             </React.Fragment>
         );
     }

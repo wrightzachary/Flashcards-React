@@ -11,7 +11,7 @@ const DisplayFlashcards = (props)=> {
                                 <tr key= {id}>
                                     <td>{flashcard.question}</td>
                                     <td className="d-flex justify-content-center">
-                                        <button className="btn btn-primary w-md-25"onClick={() => props.changeShowHide(flashcard.id)}>Answer</button>
+                                        <button className="btn btn-primary w-md-25"onClick={() => props.showAnswer(flashcard.answer)}>Answer</button>
                                     </td>
                                 </tr>
                             )}
