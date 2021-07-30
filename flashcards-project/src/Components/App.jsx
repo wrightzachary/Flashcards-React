@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import TitleBar from './TitleBar/TitleBar';
 import DisplayCollections from './DisplayCollections/displayCollections';
-import DisplayFlashcards from './DisplayFlashcards/displayFlashcards';
 import axios from 'axios';
+import CreateFlashcard from './CreateFlashcard/createFlashcard';
 
 
 
@@ -26,27 +26,35 @@ class App  extends Component {
         })
     }
 
-    grabFlashcards = async (event) => {
-        let collection = (event);
-        console.log(collection);
-        let res = await axios.get(`http://127.0.0.1:8000/flashcard/${collection}/`);
+    grabFlashcards = async () => {
+        let res = await axios.get(`http://127.0.0.1:8000/flashcard/${this.state.collection.id}`)
         this.setState({
             flashcards: res.data
         })
         console.log(this.state.flashcards)
     }
 
-    showAnswer = (event) => {
-        let flashcardAnswer = (event);
-        window.alert(flashcardAnswer);
+    addNewFlashcard = async (event) => {
+        console.log(event)
+        try {
+            let response = await axios.post(`http://127.0.0.1:8000/flashcard/${this.state.collection.id}`);
+            this.setState({
+                flashcards: response.data
+            });
+            this.grabFlashcards()
+        }
+        catch(e){
+            console.log(e.message)
+        }
+    
     }
-
+    
     render() { 
         return (  
             <React.Fragment>
                 <TitleBar />
                 <DisplayCollections collections={this.state.collections} grabFlashcards={this.grabFlashcards} />
-                <DisplayFlashcards flashcards={this.state.flashcards} showAnswer={this.showAnswer} />
+                <CreateFlashcard addNewFlashcard={this.addNewFlashcard} />
             </React.Fragment>
         );
     }
