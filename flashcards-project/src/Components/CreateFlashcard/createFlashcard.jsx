@@ -1,17 +1,14 @@
 // import axios from 'axios';
-import React, { useEffect } from 'react';
+import React from 'react';
 import useForm from '../Form/useForm';
 
 
 const CreateFlashCard = (props) => {
-    const { flashcards, handleChange, handleSubmit } = useForm(create);
+    const { values, handleChange, handleSubmit } = useForm(create);
 
     function create(){
-      // axios.post ('http://127.0.0.1:8000/flashcard/')
-      console.log(`${flashcards.question} was added to ${flashcards.collection} collection `)
-      // props.addNewFlashcard();
-      console.log(props.addNewFlashcard);
-      props.addNewFlashcard(flashcards);
+      console.log(`${values.question} was added to ${values.collection} collection `)
+      props.addNewFlashcard(values);
     }
 
   return ( 
@@ -20,33 +17,37 @@ const CreateFlashCard = (props) => {
         <label>
             Question:
             <input 
-                type="question"
+                type="text"
                 name="question"
                 onChange={handleChange}
-                values={flashcards.question}
+                values={values.question}
                 required={true}
               />
         </label>
         <label>
             Answer:
               <input 
-                  type="answer"
+                  type="text"
                   name="answer"
                   onChange={handleChange}
-                  values={flashcards.answer}
+                  values={values.answer}
                   required={true}
                 />
         </label>
-        {/* <label>
+        <label>
             Collection:
-              <input 
-                  type="collectionId"
-                  name="collectionId"
-                  onChange={handleChange}
-                  values={flashcards.collection}
-                  required={true}
-                />
-        </label> */}
+                    <select>
+                        {props.collections.map((collection, id) => {
+                            <option key={id}>{id}</option>
+                            {console.log(collection)}
+                            return (
+                                <select>
+                                    {collection.name}
+                                </select>
+                            )
+                        })}
+                    </select>
+        </label>
         <input type="submit" className="btn btn-info" value="Add" />
 
       </form>
