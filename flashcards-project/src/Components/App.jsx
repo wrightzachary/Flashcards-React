@@ -3,6 +3,7 @@ import TitleBar from './TitleBar/TitleBar';
 import DisplayCollections from './DisplayCollections/displayCollections';
 import axios from 'axios';
 import CreateFlashcard from './CreateFlashcard/createFlashcard';
+import DisplayFlashcards from './DisplayFlashcards/displayFlashcards';
 
 
 
@@ -26,12 +27,15 @@ class App  extends Component {
         })
     }
 
-    grabFlashcards = async () => {
-        let res = await axios.get(`http://127.0.0.1:8000/flashcard/${this.state.collection.id}`)
+    grabFlashcards = async (event) => {
+        let res = await axios.get(`http://127.0.0.1:8000/flashcard/${event}/`)
         this.setState({
             flashcards: res.data
         })
-        console.log(this.state.flashcards)
+    }
+
+    showAnswer = (event) => {
+        window.alert(event);
     }
 
     addNewFlashcard = async (event) => {
@@ -55,6 +59,7 @@ class App  extends Component {
                 <TitleBar />
                 <DisplayCollections collections={this.state.collections} grabFlashcards={this.grabFlashcards} />
                 <CreateFlashcard addNewFlashcard={this.addNewFlashcard} />
+                <DisplayFlashcards flashcards={this.state.flashcards} showAnswer={this.showAnswer} />
             </React.Fragment>
         );
     }

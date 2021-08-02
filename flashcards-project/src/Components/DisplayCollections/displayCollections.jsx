@@ -11,7 +11,7 @@ const DisplayCollections = (props) => {
                                 <tr key= {id}>
                                     <td>{collection.name}</td>
                                     <td className="d-flex justify-content-center">
-                                        <button className="btn btn-primary w-md-25"onClick={() => props.grabFlashcards(collection.id)}>Flashcards</button>
+                                        <button className="btn btn-primary w-md-25" onClick={() => props.grabFlashcards(collection.id)}>Flashcards</button>
                                     </td>
                                 </tr>
                             )}
