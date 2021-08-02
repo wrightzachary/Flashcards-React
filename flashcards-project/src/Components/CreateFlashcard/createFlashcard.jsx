@@ -41,9 +41,9 @@ const CreateFlashCard = (props) => {
                             <option key={id}>{id}</option>
                             {console.log(collection)}
                             return (
-                                <select>
+                                <option>
                                     {collection.name}
-                                </select>
+                                </option>
                             )
                         })}
                     </select>
