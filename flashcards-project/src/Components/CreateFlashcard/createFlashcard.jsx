@@ -1,75 +1,57 @@
-import React, {Component} from 'react';
+// import axios from 'axios';
+import React, { useEffect } from 'react';
+import useForm from '../Form/useForm';
 
 
-class CreateFlashcard extends Component {
+const CreateFlashCard = (props) => {
+    const { flashcards, handleChange, handleSubmit } = useForm(create);
 
-    constructor(props) {
-      super(props);
-      this.state = {
-            collections: [],
-            question : null,
-            answer: null,
-            collectionId : null,
-      }
+    function create(){
+      // axios.post ('http://127.0.0.1:8000/flashcard/')
+      console.log(`${flashcards.question} was added to ${flashcards.collection} collection `)
+      // props.addNewFlashcard();
+      console.log(props.addNewFlashcard);
+      props.addNewFlashcard(flashcards);
     }
-  
-    // handleChange(event) {
-    //     this.setState({
-    //         
-    //     })
-    // }
-  
-    handleSubmit(event) {
-        event.preventDefault();
-        const flashcard = {
-            collectionId : '',
-            question : '',
-            answer: '',
-        }
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-        this.addNewFlashcard(flashcard);
-    }
-  
-    mapCollections = async () => {
-        return(
-            this.state.collections.map()
-        )
-        
 
-    }
-    
+  return ( 
+    <React.Fragment>
+      <form onSubmit={handleSubmit}>
+        <label>
+            Question:
+            <input 
+                type="question"
+                name="question"
+                onChange={handleChange}
+                values={flashcards.question}
+                required={true}
+              />
+        </label>
+        <label>
+            Answer:
+              <input 
+                  type="answer"
+                  name="answer"
+                  onChange={handleChange}
+                  values={flashcards.answer}
+                  required={true}
+                />
+        </label>
+        {/* <label>
+            Collection:
+              <input 
+                  type="collectionId"
+                  name="collectionId"
+                  onChange={handleChange}
+                  values={flashcards.collection}
+                  required={true}
+                />
+        </label> */}
+        <input type="submit" className="btn btn-info" value="Add" />
 
-
-    render() {
-      return (
-        <div >
-            <center>
-            <form onSubmit={this.handleSubmit}>
-                <div className="row col-sm-3 sidenav">
-                <h3>Add A New Flashcard!</h3> 
-
-                        <label>Question:</label>
-                        <input type="text" name="question" value={this.state.question} />
-
-                        <label>Answer:</label>
-                        <input type="text" name="answer" value={this.state.answer} />
-                        <hr/>
-
-                        <select name="collectionId" required id="id_collectionId">
-                            <option value selected >Select a collection</option>
-                            <option value="collection">{this.mapCollections}</option>
-                        </select>
-
-                        <input type="submit" class="btn btn-info" value="Add" />
-
-                </div>
-            </form>
-            </center>
-        </div>
-      )
-    }
-  }
-
-export default CreateFlashcard;
+      </form>
+    </React.Fragment>
+   );
+}
+ 
+export default CreateFlashCard;
