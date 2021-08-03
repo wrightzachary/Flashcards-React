@@ -39,47 +39,20 @@ class App  extends Component {
     }
 
     addNewFlashcard = async (event) => {
-        console.log(event)
         try {
             let response = await axios.post('http://127.0.0.1:8000/flashcard/', event);
-            this.setState({
-                flashcards: response.data
-            });
-            this.grabFlashcards(this.state.collection.id)
         }
         catch(e){
             console.log(e.message)
         }
     }
-
-    mapCollections = async () => {
-        let optionItems = this.state.collections.map((collection) => {
-            <option key={collection}>{collection}</option>
-            return (
-                <div>                
-                    <div className="row">
-                        <div className="col-9 text-left">
-                            <label>Select the percent to transfer</label>
-                        </div>
-                        <div className="col-2 text-left">
-                            <select>
-                                {optionItems}
-                            </select>
-                        </div>
-                        <div className="col-1 text-left">
-                            <label>&nbsp;</label>
-                        </div>
-                    </div>
-                </div>
-            )
-    })}
     
     render() { 
         return (  
             <React.Fragment>
                 <TitleBar />
-                <DisplayCollections collections={this.state.collections} grabFlashcards={this.grabFlashcards} />
-                <CreateFlashcard addNewFlashcard={this.addNewFlashcard} mapCollections={this.mapCollections} collections={this.state.collections} />
+                <DisplayCollections collections={this.state.collections} grabFlashcards={this.grabFlashcards} flashcards={this.state.flashcards} />
+                <CreateFlashcard addNewFlashcard={this.addNewFlashcard}  collections={this.state.collections} />
                 <DisplayFlashcards flashcards={this.state.flashcards} showAnswer={this.showAnswer} />
             </React.Fragment>
         );

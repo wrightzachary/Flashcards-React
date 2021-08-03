@@ -7,7 +7,6 @@ const CreateFlashCard = (props) => {
     const { values, handleChange, handleSubmit } = useForm(create);
 
     function create(){
-      console.log(`${values.question} was added to ${values.collection} collection `)
       props.addNewFlashcard(values);
     }
 
@@ -36,12 +35,11 @@ const CreateFlashCard = (props) => {
         </label>
         <label>
             Collection:
-                    <select>
+                    <select name="collectionId" onChange={handleChange} values={values.id}>
                         {props.collections.map((collection, id) => {
                             <option key={id}>{id}</option>
-                            {console.log(collection)}
                             return (
-                                <option>
+                                <option value={id+1}>
                                     {collection.name}
                                 </option>
                             )
