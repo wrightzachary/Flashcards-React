@@ -1,4 +1,5 @@
 import React from 'react';
+import UpdateFlashcard from '../UpdateFlashcard/updateFlashcard';
 
 const DisplayFlashcards = (props)=> {
 
@@ -16,13 +17,14 @@ const DisplayFlashcards = (props)=> {
                                     <td className="d-flex justify-content-center">
                                         <button className="btn btn-primary w-md-25"onClick={() => props.showAnswer(flashcard.answer)}>Answer</button>
                                     </td>
-                                    <td className="d-flex justify-content-center">
-                                        <button className="btn btn-primary w-md-25" onClick={() => props.changeForm(flashcard.id)}>
+                                    <td name="update" className="d-flex justify-content-center">
+                                        <button  className="btn btn-primary w-md-25" onClick={() => props.changeForm(flashcard.id)} value={id}>
                                         Update Flashcard
-                                        </button>
+                                        </button> 
                                     </td>
                                 </tr>
-                            )}
+                            )},
+                            <UpdateFlashcard flashcard={update.value} />
                         )}
                 </tbody>
             </table>

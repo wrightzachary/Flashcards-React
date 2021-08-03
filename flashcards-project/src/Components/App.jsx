@@ -59,12 +59,11 @@ class App  extends Component {
     }
 
     postFlashcard = async (event) => {
-        console.log(event)
         if (event.input === true)
 		try{
 			let res = await axios.post(`http://127.0.0.1:8000/flashcard/${event.id}/`)
             console.log(res)
-
+            this.state.displayForm = false
 		}
 		catch(e){
 			console.log(e)
