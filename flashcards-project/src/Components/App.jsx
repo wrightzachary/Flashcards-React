@@ -77,7 +77,7 @@ class App  extends Component {
                 <DisplayCollections collections={this.state.collections} grabFlashcards={this.grabFlashcards} flashcards={this.state.flashcards} />
                 <CreateFlashcard addNewFlashcard={this.addNewFlashcard}  collections={this.state.collections} />
                 <DisplayFlashcards flashcards={this.state.flashcards} showAnswer={this.showAnswer} changeForm={this.changeForm} />
-                <UpdateFlashcard flashcards={this.state.flashcards} postFlashcard={this.postFlashcard}displayForm={this.state.displayForm} collections={this.state.collections}/>
+                <UpdateFlashcard  postFlashcard={this.postFlashcard} displayForm={this.state.displayForm} collections={this.state.collections}/>
             </React.Fragment>
         );
     }

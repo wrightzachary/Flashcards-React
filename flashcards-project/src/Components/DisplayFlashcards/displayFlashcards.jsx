@@ -1,5 +1,4 @@
 import React from 'react';
-import UpdateFlashcard from '../UpdateFlashcard/updateFlashcard';
 
 const DisplayFlashcards = (props)=> {
 
@@ -24,7 +23,7 @@ const DisplayFlashcards = (props)=> {
                                     </td>
                                 </tr>
                             )},
-                            <UpdateFlashcard flashcard={update.value} />
+                            // <UpdateFlashcard flashcard={update.value} />
                         )}
                 </tbody>
             </table>

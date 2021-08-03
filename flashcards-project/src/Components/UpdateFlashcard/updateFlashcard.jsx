@@ -6,7 +6,8 @@ const UpdateFlashcard = (props) => {
     console.log(props)
 
     const { values, handleChange, handleSubmit } = useForm(update);
-    function update(id){
+    function update(){
+        console.log(values)
         props.postFlashcard(values);
       }
 
