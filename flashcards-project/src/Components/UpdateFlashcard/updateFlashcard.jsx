@@ -2,10 +2,10 @@ import React from 'react';
 import useForm from '../Form/useForm';
 
 
-const UpdateFlashcard = (props) => {
+const UpdateFlashcard = (props, id) => {
     const { values, handleChange, handleSubmit } = useForm(update);
     function update(){
-        props.postFlashcard(values);
+        props.postFlashcard(values, id);
       }
 
     if (props.displayForm === true) {

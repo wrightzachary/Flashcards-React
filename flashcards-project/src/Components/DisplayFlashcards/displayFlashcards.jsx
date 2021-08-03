@@ -17,7 +17,7 @@ const DisplayFlashcards = (props)=> {
                                         <button className="btn btn-primary w-md-25"onClick={() => props.showAnswer(flashcard.answer)}>Answer</button>
                                     </td>
                                     <td className="d-flex justify-content-center">
-                                        <button className="btn btn-primary w-md-25" onClick={() => props.changeForm()}>
+                                        <button className="btn btn-primary w-md-25" onClick={() => props.changeForm(flashcard.id)}>
                                         Update Flashcard
                                         </button>
                                     </td>
