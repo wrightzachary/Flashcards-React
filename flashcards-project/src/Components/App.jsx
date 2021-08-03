@@ -14,11 +14,16 @@ class App  extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            flashcards:[
-               { displayForm: false, }       
-            ], 
-            collections: []
+            flashcards:[], 
+            collections: [],
+            displayForm : false
          }
+    }
+
+    changeForm = ()=>{
+        this.setState({
+            displayForm:true
+        })
     }
 
     componentDidMount() {
@@ -54,6 +59,7 @@ class App  extends Component {
     }
 
     postFlashcard = async (event) => {
+        console.log(event)
         if (event.input === true)
 		try{
 			let res = await axios.post(`http://127.0.0.1:8000/flashcard/${event.id}/`)
@@ -71,8 +77,8 @@ class App  extends Component {
                 <TitleBar />
                 <DisplayCollections collections={this.state.collections} grabFlashcards={this.grabFlashcards} flashcards={this.state.flashcards} />
                 <CreateFlashcard addNewFlashcard={this.addNewFlashcard}  collections={this.state.collections} />
-                <DisplayFlashcards flashcards={this.state.flashcards} showAnswer={this.showAnswer}  />
-                <UpdateFlashcard flashcards={this.state.flashcards} postFlashcard={this.postFlashcard}/>
+                <DisplayFlashcards flashcards={this.state.flashcards} showAnswer={this.showAnswer} changeForm={this.changeForm} />
+                <UpdateFlashcard flashcards={this.state.flashcards} postFlashcard={this.postFlashcard}displayForm={this.state.displayForm} collections={this.state.collections}/>
             </React.Fragment>
         );
     }

@@ -1,6 +1,9 @@
 import React from 'react';
 
 const DisplayFlashcards = (props)=> {
+
+   
+
     return (
         <React.Fragment>
             <table>
@@ -14,7 +17,9 @@ const DisplayFlashcards = (props)=> {
                                         <button className="btn btn-primary w-md-25"onClick={() => props.showAnswer(flashcard.answer)}>Answer</button>
                                     </td>
                                     <td className="d-flex justify-content-center">
-                                        <button className="btn btn-primary w-md-25"onClick={() => props.displayForm = true}>Update</button>
+                                        <button className="btn btn-primary w-md-25" onClick={() => props.changeForm()}>
+                                        Update Flashcard
+                                        </button>
                                     </td>
                                 </tr>
                             )}

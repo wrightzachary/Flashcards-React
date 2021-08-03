@@ -47,7 +47,6 @@ const CreateFlashCard = (props) => {
                     </select>
         </label>
         <input type="submit" className="btn btn-info" value="Add" />
-
       </form>
     </React.Fragment>
    );
