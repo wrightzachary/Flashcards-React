@@ -97,10 +97,11 @@ class App  extends Component {
         return (  
             <React.Fragment>
                 <TitleBar currentCollection={this.state.currentCollection} />
-                <DisplayCollections collections={this.state.collections} setShowFlashcards={this.setShowFlashcards} flashcards={this.state.flashcards} />
                 <CreateFlashcard addNewFlashcard={this.addNewFlashcard}  collections={this.state.collections} />
-                <DisplayFlashcards flashcards={this.state.flashcards} showFlashcards={this.state.showFlashcards} showAnswer={this.showAnswer} changeForm={this.changeForm} />
                 <UpdateFlashcard currentCard={this.state.updatingCard} putFlashcard={this.putFlashcard} displayForm={this.state.displayForm} collections={this.state.collections}/>
+                <DisplayCollections collections={this.state.collections} setShowFlashcards={this.setShowFlashcards} flashcards={this.state.flashcards} />
+                <DisplayFlashcards flashcards={this.state.flashcards} showFlashcards={this.state.showFlashcards} showAnswer={this.showAnswer} changeForm={this.changeForm} />
+               
             </React.Fragment>
         );
     }

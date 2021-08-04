@@ -1,5 +1,6 @@
 import React from 'react';
 import useForm from '../Form/useForm';
+import './createFlashcard.css';
 
 
 const CreateFlashCard = (props) => {
@@ -11,6 +12,8 @@ const CreateFlashCard = (props) => {
 
   return ( 
     <React.Fragment>
+      <div className="creator">
+      <h1>Add a flashcard to a collection:</h1>
       <form onSubmit={handleSubmit}>
         <label>
             Question:
@@ -47,6 +50,7 @@ const CreateFlashCard = (props) => {
         </label>
         <input type="submit" className="btn btn-info" value="Add" />
       </form>
+      </div>
     </React.Fragment>
    );
 }

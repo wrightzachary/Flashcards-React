@@ -1,5 +1,6 @@
 import React from 'react';
 import useForm from '../Form/useForm';
+import './updateflashcard.css';
 
 
 const UpdateFlashcard = (props) => {
@@ -12,6 +13,8 @@ const UpdateFlashcard = (props) => {
     if (props.displayForm === true) {
         return ( 
             <React.Fragment>
+                <div className="update">
+                <h1>Update a flashcard:</h1>
                 <form onSubmit={handleSubmit}>
                         <label>
                             Question:
@@ -50,6 +53,7 @@ const UpdateFlashcard = (props) => {
                         </label>
                     <input type="submit" className="btn btn-info" value="Add" />
                 </form>
+            </div>
             </React.Fragment>
         );
     }

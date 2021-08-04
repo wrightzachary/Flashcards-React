@@ -1,24 +1,23 @@
 import React from 'react';
+import './displayCollections.css';
 
 
 const DisplayCollections = (props) => {
     return (
         <React.Fragment>
-            <table>
-                <tbody>
-                    <tr><td>Collections</td></tr>
+            <div className="collections">
+            <h1>Collections:</h1>
+                <div>
                         {props.collections.map((collection, id) => {
                             return (
-                                <tr key= {id}>
-                                    <td>{collection.name}</td>
-                                    <td className="d-flex justify-content-center">
+                                <div className="info" key= {id}>
+                                    <h2>{collection.name}</h2>
                                         <button className="btn btn-primary w-md-25" onClick={() => props.setShowFlashcards(collection)}>Flashcards</button>
-                                        </td>
-                                </tr>
+                                </div>
                             )}
                         )}
-                </tbody>
-            </table>
+                </div>
+            </div>
             
         </React.Fragment>
     )
