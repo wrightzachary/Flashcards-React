@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const DisplayCollections = (props) => {
     return (
         <React.Fragment>
@@ -11,13 +12,14 @@ const DisplayCollections = (props) => {
                                 <tr key= {id}>
                                     <td>{collection.name}</td>
                                     <td className="d-flex justify-content-center">
-                                        <button className="btn btn-primary w-md-25" onClick={() => props.setShowFlashcards(collection.id)}>Flashcards</button>
-                                    </td>
+                                        <button className="btn btn-primary w-md-25" onClick={() => props.setShowFlashcards(collection)}>Flashcards</button>
+                                        </td>
                                 </tr>
                             )}
                         )}
                 </tbody>
             </table>
+            
         </React.Fragment>
     )
 }

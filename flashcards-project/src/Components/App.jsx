@@ -18,7 +18,8 @@ class App  extends Component {
             collections: [],
             showFlashcards: false,
             displayForm : false,
-            updatingCard: null
+            updatingCard: null,
+            currentCollection: null
          }
     }
 
@@ -41,10 +42,11 @@ class App  extends Component {
         })
     }
     setShowFlashcards = async (event) => {
+        this.grabFlashcards(event.id);
         this.setState({
-            showFlashcards: true
-        })
-        this.grabFlashcards(event);
+            showFlashcards: true,
+            currentCollection: event.name
+        });
     }
     grabFlashcards = async (event) => {
             let res = await axios.get(`http://127.0.0.1:8000/flashcard/${event}/`)
@@ -94,7 +96,7 @@ class App  extends Component {
     render() { 
         return (  
             <React.Fragment>
-                <TitleBar />
+                <TitleBar currentCollection={this.state.currentCollection} />
                 <DisplayCollections collections={this.state.collections} setShowFlashcards={this.setShowFlashcards} flashcards={this.state.flashcards} />
                 <CreateFlashcard addNewFlashcard={this.addNewFlashcard}  collections={this.state.collections} />
                 <DisplayFlashcards flashcards={this.state.flashcards} showFlashcards={this.state.showFlashcards} showAnswer={this.showAnswer} changeForm={this.changeForm} />
