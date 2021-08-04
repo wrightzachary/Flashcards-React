@@ -3,11 +3,9 @@ import useForm from '../Form/useForm';
 
 
 const UpdateFlashcard = (props) => {
-    console.log(props)
 
     const { values, handleChange, handleSubmit } = useForm(update);
     function update(){
-        console.log(values)
         props.putFlashcard(values);
       }
 
@@ -39,10 +37,10 @@ const UpdateFlashcard = (props) => {
                         </label>
                         <label>
                             Collection:
-                                <select name="collectionId" placeholder={props.currentCard.collectionId} onChange={handleChange} values={values.collectionId}>
+                                <select name="collectionId"  onChange={handleChange} values={values.collectionId} required={false}>
                                     {props.collections.map((collection,  id) => {
                                         <option key={id}>{id}</option>
-                                        return (
+                                        return ( 
                                             <option value={collection.id}>
                                                 {collection.name}
                                             </option>
@@ -56,7 +54,7 @@ const UpdateFlashcard = (props) => {
         );
     }
     else{
-        return (null)
+        return null
     }
 }  
 

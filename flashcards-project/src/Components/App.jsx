@@ -16,6 +16,7 @@ class App  extends Component {
         this.state = { 
             flashcards:[], 
             collections: [],
+            showFlashcards: false,
             displayForm : false,
             updatingCard: null
          }
@@ -39,22 +40,32 @@ class App  extends Component {
             collections: res.data
         })
     }
-
-    grabFlashcards = async (event) => {
-        let res = await axios.get(`http://127.0.0.1:8000/flashcard/${event}/`)
+    setShowFlashcards = async (event) => {
         this.setState({
-            flashcards: res.data
+            showFlashcards: true
         })
+        this.grabFlashcards(event);
+    }
+    grabFlashcards = async (event) => {
+            let res = await axios.get(`http://127.0.0.1:8000/flashcard/${event}/`)
+            this.setState({
+                flashcards: res.data
+            })
     }
 
     showAnswer = (event) => {
         window.alert(event);
+        this.setState({
+            showFlashcards: false
+        })
     }
 
     addNewFlashcard = async (event) => {
         try {
             let response = await axios.post('http://127.0.0.1:8000/flashcard/', event);
-            console.log(response)
+            this.setState({
+                showFlashcards: false
+            })
         }
         catch(e){
             console.log(e.message)
@@ -62,18 +73,18 @@ class App  extends Component {
     }
 
     putFlashcard = async (event) => {
-        console.log(event)
         let cardToUpdate ={
             id : this.state.updatingCard.id,
             question: event.question,
             answer: event.answer,
             collectionId: event.collectionId
         }
-        console.log(cardToUpdate);
 		try{
 			let res = await axios.put(`http://127.0.0.1:8000/flashcardid/${this.state.updatingCard.id}/`, cardToUpdate)
-            console.log(res)
-            this.state.displayForm = false
+            this.setState({
+                displayForm: false,
+                showFlashcards: false
+            })           
 		}
 		catch(e){
 			console.log(e)
@@ -84,9 +95,9 @@ class App  extends Component {
         return (  
             <React.Fragment>
                 <TitleBar />
-                <DisplayCollections collections={this.state.collections} grabFlashcards={this.grabFlashcards} flashcards={this.state.flashcards} />
+                <DisplayCollections collections={this.state.collections} setShowFlashcards={this.setShowFlashcards} flashcards={this.state.flashcards} />
                 <CreateFlashcard addNewFlashcard={this.addNewFlashcard}  collections={this.state.collections} />
-                <DisplayFlashcards flashcards={this.state.flashcards} showAnswer={this.showAnswer} changeForm={this.changeForm} />
+                <DisplayFlashcards flashcards={this.state.flashcards} showFlashcards={this.state.showFlashcards} showAnswer={this.showAnswer} changeForm={this.changeForm} />
                 <UpdateFlashcard currentCard={this.state.updatingCard} putFlashcard={this.putFlashcard} displayForm={this.state.displayForm} collections={this.state.collections}/>
             </React.Fragment>
         );
