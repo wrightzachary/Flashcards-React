@@ -16,13 +16,16 @@ class App  extends Component {
         this.state = { 
             flashcards:[], 
             collections: [],
-            displayForm : false
+            displayForm : false,
+            updatingCard: null
          }
     }
 
-    changeForm = ()=>{
+    changeForm = async (id)=>{
+        let res = await axios.get(`http://127.0.0.1:8000/flashcardid/${id}/`)
         this.setState({
-            displayForm:true
+            displayForm:true,
+            updatingCard: res.data
         })
     }
 
@@ -58,10 +61,17 @@ class App  extends Component {
         }
     }
 
-    postFlashcard = async (event) => {
-        if (event.input === true)
+    putFlashcard = async (event) => {
+        console.log(event)
+        let cardToUpdate ={
+            id : this.state.updatingCard.id,
+            question: event.question,
+            answer: event.answer,
+            collectionId: event.collectionId
+        }
+        console.log(cardToUpdate);
 		try{
-			let res = await axios.post(`http://127.0.0.1:8000/flashcard/${event.id}/`)
+			let res = await axios.put(`http://127.0.0.1:8000/flashcardid/${this.state.updatingCard.id}/`, cardToUpdate)
             console.log(res)
             this.state.displayForm = false
 		}
@@ -77,7 +87,7 @@ class App  extends Component {
                 <DisplayCollections collections={this.state.collections} grabFlashcards={this.grabFlashcards} flashcards={this.state.flashcards} />
                 <CreateFlashcard addNewFlashcard={this.addNewFlashcard}  collections={this.state.collections} />
                 <DisplayFlashcards flashcards={this.state.flashcards} showAnswer={this.showAnswer} changeForm={this.changeForm} />
-                <UpdateFlashcard  postFlashcard={this.postFlashcard} displayForm={this.state.displayForm} collections={this.state.collections}/>
+                <UpdateFlashcard currentCard={this.state.updatingCard} putFlashcard={this.putFlashcard} displayForm={this.state.displayForm} collections={this.state.collections}/>
             </React.Fragment>
         );
     }

@@ -8,7 +8,7 @@ const UpdateFlashcard = (props) => {
     const { values, handleChange, handleSubmit } = useForm(update);
     function update(){
         console.log(values)
-        props.postFlashcard(values);
+        props.putFlashcard(values);
       }
 
     if (props.displayForm === true) {
@@ -21,6 +21,7 @@ const UpdateFlashcard = (props) => {
                                 type="text"
                                 name="question"
                                 onChange={handleChange}
+                                placeholder={props.currentCard.question}
                                 values={values.question}
                                 required={false}
                             />
@@ -31,17 +32,18 @@ const UpdateFlashcard = (props) => {
                                 type="text"
                                 name="answer"
                                 onChange={handleChange}
+                                placeholder={props.currentCard.answer}
                                 values={values.answer}
                                 required={false}
                                 />
                         </label>
                         <label>
                             Collection:
-                                <select name="collectionId" onChange={handleChange} values={values.id}>
+                                <select name="collectionId" placeholder={props.currentCard.collectionId} onChange={handleChange} values={values.collectionId}>
                                     {props.collections.map((collection,  id) => {
                                         <option key={id}>{id}</option>
                                         return (
-                                            <option value={id+1}>
+                                            <option value={collection.id}>
                                                 {collection.name}
                                             </option>
                                         )
@@ -59,4 +61,3 @@ const UpdateFlashcard = (props) => {
 }  
 
 export default UpdateFlashcard;
-
