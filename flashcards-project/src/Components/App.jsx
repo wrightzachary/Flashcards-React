@@ -1,6 +1,6 @@
 // Paired programmed by Kirk and Zach
 
-
+import './App.css';
 import React, {Component} from 'react';
 import TitleBar from './TitleBar/TitleBar';
 import DisplayCollections from './DisplayCollections/displayCollections';
