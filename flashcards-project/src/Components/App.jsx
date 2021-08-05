@@ -66,7 +66,8 @@ class App  extends Component {
         try {
             let response = await axios.post('http://127.0.0.1:8000/flashcard/', event);
             this.setState({
-                showFlashcards: false
+                showFlashcards: false,
+                // cardNumber: tempCardNumber
             })
         }
         catch(e){
@@ -93,15 +94,37 @@ class App  extends Component {
 		}
     }
 
+    goToNextCard(){
+        let tempCardNumber = this.state.cardNumber;
+        tempCardNumber++;
+        if(tempCardNumber === this.flashcards.length){
+            tempCardNumber = 0;
+        }
+        this.setState({
+            cardNumber: tempCardNumber
+        });
+    }
+
+    goToPreviousCard(){
+        let tempCardNumber = this.state.cardNumber;
+        tempCardNumber--;
+        if(tempCardNumber < 0)
+        tempCardNumber = this.flashcards.length - 1;
+        this.setState({
+            cardNumber: tempCardNumber
+        });
+        }
+
+
     render() { 
         return (  
             <React.Fragment>
-                <TitleBar currentCollection={this.state.currentCollection} />
+                <TitleBar />
                 <CreateFlashcard addNewFlashcard={this.addNewFlashcard}  collections={this.state.collections} />
                 <UpdateFlashcard currentCard={this.state.updatingCard} putFlashcard={this.putFlashcard} displayForm={this.state.displayForm} collections={this.state.collections}/>
                 <DisplayCollections collections={this.state.collections} setShowFlashcards={this.setShowFlashcards} flashcards={this.state.flashcards} />
-                <DisplayFlashcards flashcards={this.state.flashcards} showFlashcards={this.state.showFlashcards} showAnswer={this.showAnswer} changeForm={this.changeForm} />
-               
+                <DisplayFlashcards flashcards={this.state.flashcards} showFlashcards={this.state.showFlashcards} showAnswer={this.showAnswer} currentCollection={this.state.currentCollection} changeForm={this.changeForm} />
+                {/* <DisplayFlashcards flashcard={this.flashcards[this.state.flashcardNumber]} nextCard={() => this.goToNextCard()} previousCard={() => this.goToPreviousCard()}/> */}
             </React.Fragment>
         );
     }

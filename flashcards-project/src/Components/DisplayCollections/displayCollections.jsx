@@ -6,7 +6,7 @@ const DisplayCollections = (props) => {
     return (
         <React.Fragment>
             <div className="collections">
-            <h1>Collections:</h1>
+            <h1>Available Collections:</h1>
                 <div>
                         {props.collections.map((collection, id) => {
                             return (
